@@ -141,7 +141,7 @@
 
 from pyexpat import model
 from django.db import models
-from django.db.models.enums import Choices
+# from django.db.models.enums import Choices
 
 from wagtail.core.models import *
 from wagtail.core.fields import RichTextField
