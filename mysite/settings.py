@@ -54,10 +54,10 @@ INSTALLED_APPS = [
     # 'wagtailmenus',
 
     # Third party package used by our blog
-    'el_pagination',
+    # 'el_pagination',
     'modelcluster',
     'taggit',
-    'wagtailcodeblock',
+    # 'wagtailcodeblock',
 
 ]
 
