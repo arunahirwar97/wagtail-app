@@ -21,10 +21,28 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from django.conf.urls.static import static
 from django.conf import settings
-
+from django.urls import path, re_path, include
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^wagtail-admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^blog/', include(wagtail_urls)),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+    path('admin/', admin.site.urls),
+    path('wagtail_admin/', include(wagtailadmin_urls)),
+    # url(r'^documents/', include(wagtaildocs_urls)),
+    path('documents/', include(wagtaildocs_urls)),
+    path('pages/', include(wagtail_urls)),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+    # Serve static and media files from development server
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns = urlpatterns + [
+    path("cms", include(wagtail_urls)),
+]
+
